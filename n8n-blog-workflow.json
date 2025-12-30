@@ -1,0 +1,257 @@
+{
+  "name": "Slee Automation Blog Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Schedule (Mon/Wed/Fri 9AM)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300],
+      "notes": "Triggers at 9 AM on Monday, Wednesday, Friday"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "topics",
+              "name": "topics",
+              "value": "={{ [\n  'What is GEO (Generative Engine Optimization)?',\n  'How to get cited by ChatGPT in 2025',\n  'SEO vs GEO: Which should you prioritize?',\n  'Schema markup for AI citations',\n  'How Perplexity AI selects sources',\n  'Technical SEO checklist for 2025',\n  'Entity SEO and knowledge graphs',\n  'Featured snippets optimization guide',\n  'AI Overviews: How Google is changing search',\n  'Content structure for AI readability',\n  'How to track AI citations',\n  'Local SEO in the AI era',\n  'E-E-A-T for GEO optimization',\n  'Voice search and AI assistants',\n  'Building topical authority for AI citations',\n  'Link building strategies that help GEO',\n  'How to optimize FAQ sections for AI',\n  'The future of search: AI vs traditional',\n  'Case study: Getting cited by Claude',\n  'Programmatic SEO for scale',\n  'Content automation best practices',\n  'How AI crawls and indexes content',\n  'Semantic SEO for better AI understanding',\n  'Author entity optimization',\n  'How to appear in Google AI Overviews'\n] }}",
+              "type": "array"
+            },
+            {
+              "id": "randomTopic",
+              "name": "selectedTopic",
+              "value": "={{ $json.topics[Math.floor(Math.random() * $json.topics.length)] }}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "set-topic",
+      "name": "Select Random Topic",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "model": "claude-sonnet-4-20250514",
+        "messages": {
+          "values": [
+            {
+              "content": "You are an expert SEO and GEO (Generative Engine Optimization) content writer for Slee Automation, a company that helps businesses get cited by AI and rank on Google.\n\nWrite a comprehensive, actionable blog post about: {{ $json.selectedTopic }}\n\nRequirements:\n- 1500-2000 words\n- Include practical examples and actionable steps\n- Use headers (H2, H3) for structure\n- Include a brief intro and conclusion\n- Write in a professional but accessible tone\n- Focus on providing genuine value, not fluff\n- Include relevant statistics or data points where appropriate\n- Add internal context about how Slee Automation can help\n\nFormat the response as JSON with these fields:\n{\n  \"title\": \"SEO-optimized title (60 chars max)\",\n  \"metaDescription\": \"Compelling meta description (155 chars max)\",\n  \"category\": \"GEO\" or \"SEO\" or \"Strategy\",\n  \"readTime\": \"X min read\",\n  \"content\": \"Full markdown content of the article\"\n}",
+              "role": "user"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 4000,
+          "temperature": 0.7
+        }
+      },
+      "id": "claude-generate",
+      "name": "Generate Blog Post (Claude)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.2,
+      "position": [680, 300],
+      "credentials": {
+        "anthropicApi": {
+          "id": "YOUR_ANTHROPIC_CREDENTIAL_ID",
+          "name": "Anthropic API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\n\n// Parse the JSON from Claude's response\nlet blogPost;\ntry {\n  // Extract JSON from the response text\n  const text = response.text || response.content || JSON.stringify(response);\n  const jsonMatch = text.match(/\\{[\\s\\S]*\\}/);\n  if (jsonMatch) {\n    blogPost = JSON.parse(jsonMatch[0]);\n  } else {\n    throw new Error('No JSON found in response');\n  }\n} catch (e) {\n  blogPost = {\n    title: 'Blog Post',\n    metaDescription: 'A blog post about SEO and GEO',\n    category: 'SEO',\n    readTime: '5 min read',\n    content: response.text || 'Content generation failed'\n  };\n}\n\n// Add metadata\nblogPost.publishDate = new Date().toISOString().split('T')[0];\nblogPost.author = 'Sandy Lee';\nblogPost.slug = blogPost.title\n  .toLowerCase()\n  .replace(/[^a-z0-9]+/g, '-')\n  .replace(/^-|-$/g, '');\n\nreturn blogPost;"
+      },
+      "id": "parse-response",
+      "name": "Parse Blog Post",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "resource": "page",
+        "operation": "create",
+        "databaseId": "YOUR_NOTION_DATABASE_ID",
+        "properties": {
+          "propertyValues": [
+            {
+              "key": "Title",
+              "title": {
+                "title": [
+                  {
+                    "text": {
+                      "content": "={{ $json.title }}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "key": "Slug",
+              "richText": {
+                "rich_text": [
+                  {
+                    "text": {
+                      "content": "={{ $json.slug }}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "key": "Category",
+              "select": {
+                "select": {
+                  "name": "={{ $json.category }}"
+                }
+              }
+            },
+            {
+              "key": "Meta Description",
+              "richText": {
+                "rich_text": [
+                  {
+                    "text": {
+                      "content": "={{ $json.metaDescription }}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "key": "Read Time",
+              "richText": {
+                "rich_text": [
+                  {
+                    "text": {
+                      "content": "={{ $json.readTime }}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "key": "Author",
+              "richText": {
+                "rich_text": [
+                  {
+                    "text": {
+                      "content": "={{ $json.author }}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "key": "Publish Date",
+              "date": {
+                "date": {
+                  "start": "={{ $json.publishDate }}"
+                }
+              }
+            },
+            {
+              "key": "Status",
+              "select": {
+                "select": {
+                  "name": "Published"
+                }
+              }
+            }
+          ]
+        },
+        "blockUi": {
+          "blockValues": [
+            {
+              "type": "paragraph",
+              "richText": {
+                "text": [
+                  {
+                    "textContent": "={{ $json.content }}"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "id": "notion-create",
+      "name": "Create Notion Page",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [1120, 300],
+      "credentials": {
+        "notionApi": {
+          "id": "YOUR_NOTION_CREDENTIAL_ID",
+          "name": "Notion API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule (Mon/Wed/Fri 9AM)": {
+      "main": [
+        [
+          {
+            "node": "Select Random Topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select Random Topic": {
+      "main": [
+        [
+          {
+            "node": "Generate Blog Post (Claude)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Blog Post (Claude)": {
+      "main": [
+        [
+          {
+            "node": "Parse Blog Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Blog Post": {
+      "main": [
+        [
+          {
+            "node": "Create Notion Page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveExecutionProgress": true
+  }
+}

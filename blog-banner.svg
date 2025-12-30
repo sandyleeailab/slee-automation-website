@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400">
+  <defs>
+    <!-- Warm wooden oak gradient background -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#faf7f4"/>
+      <stop offset="100%" style="stop-color:#f0ebe4"/>
+    </linearGradient>
+    <!-- Oak accent gradient -->
+    <linearGradient id="oakGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8B6914"/>
+      <stop offset="50%" style="stop-color:#A67C00"/>
+      <stop offset="100%" style="stop-color:#C49A3A"/>
+    </linearGradient>
+    <!-- Subtle wood grain pattern -->
+    <pattern id="woodGrain" patternUnits="userSpaceOnUse" width="100" height="100">
+      <rect width="100" height="100" fill="transparent"/>
+      <path d="M0 20 Q25 18 50 20 T100 22" stroke="#d4c4a8" stroke-width="0.5" fill="none" opacity="0.3"/>
+      <path d="M0 50 Q25 48 50 52 T100 50" stroke="#d4c4a8" stroke-width="0.5" fill="none" opacity="0.3"/>
+      <path d="M0 80 Q25 82 50 78 T100 80" stroke="#d4c4a8" stroke-width="0.5" fill="none" opacity="0.3"/>
+    </pattern>
+  </defs>
+
+  <!-- Warm background -->
+  <rect width="1200" height="400" fill="url(#bgGrad)"/>
+  <rect width="1200" height="400" fill="url(#woodGrain)" opacity="0.5"/>
+
+  <!-- Clean geometric shapes - oak tones -->
+  <circle cx="100" cy="80" r="60" fill="#C49A3A" opacity="0.08"/>
+  <circle cx="1100" cy="320" r="80" fill="#8B6914" opacity="0.06"/>
+
+  <!-- Minimal accent line -->
+  <rect x="80" y="120" width="3" height="160" fill="url(#oakGrad)" rx="1.5"/>
+
+  <!-- Simple connected dots - representing strategy/flow -->
+  <g>
+    <line x1="300" y1="200" x2="500" y2="180" stroke="#A67C00" stroke-width="1.5" opacity="0.25"/>
+    <line x1="500" y1="180" x2="700" y2="200" stroke="#A67C00" stroke-width="1.5" opacity="0.25"/>
+    <line x1="700" y1="200" x2="900" y2="170" stroke="#A67C00" stroke-width="1.5" opacity="0.25"/>
+    <circle cx="300" cy="200" r="5" fill="#8B6914" opacity="0.4"/>
+    <circle cx="500" cy="180" r="5" fill="#A67C00" opacity="0.4"/>
+    <circle cx="700" cy="200" r="5" fill="#A67C00" opacity="0.4"/>
+    <circle cx="900" cy="170" r="5" fill="#C49A3A" opacity="0.4"/>
+  </g>
+
+  <!-- Subtle floating rectangles -->
+  <rect x="1000" y="100" width="35" height="35" rx="6" fill="#A67C00" opacity="0.1" transform="rotate(12 1017 117)"/>
+  <rect x="1050" y="140" width="25" height="25" rx="4" fill="#C49A3A" opacity="0.08" transform="rotate(-8 1062 152)"/>
+
+  <!-- Bottom accent -->
+  <rect x="0" y="396" width="1200" height="4" fill="url(#oakGrad)"/>
+</svg>
