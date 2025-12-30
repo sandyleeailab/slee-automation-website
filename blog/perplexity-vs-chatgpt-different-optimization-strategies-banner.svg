@@ -1,0 +1,63 @@
+<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc"/>
+      <stop offset="100%" style="stop-color:#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="accent1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="400" fill="url(#bg1)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="658" cy="78" r="120" fill="#6366f1" opacity="0.08"/>
+  <circle cx="698" cy="318" r="80" fill="#8b5cf6" opacity="0.06"/>
+  <circle cx="98" cy="348" r="100" fill="#6366f1" opacity="0.05"/>
+
+  <!-- Neural network nodes -->
+  <circle cx="548" cy="98" r="12" fill="#6366f1" opacity="0.7"/>
+  <circle cx="618" cy="148" r="10" fill="#8b5cf6" opacity="0.6"/>
+  <circle cx="708" cy="128" r="14" fill="#6366f1" opacity="0.5"/>
+  <circle cx="578" cy="208" r="8" fill="#a855f7" opacity="0.6"/>
+  <circle cx="668" cy="218" r="11" fill="#8b5cf6" opacity="0.5"/>
+  <circle cx="718" cy="188" r="9" fill="#6366f1" opacity="0.6"/>
+
+  <!-- Connection lines -->
+  <line x1="548" y1="98" x2="618" y2="148" stroke="#6366f1" stroke-width="2" opacity="0.3"/>
+  <line x1="618" y1="148" x2="708" y2="128" stroke="#8b5cf6" stroke-width="2" opacity="0.3"/>
+  <line x1="618" y1="148" x2="668" y2="218" stroke="#a855f7" stroke-width="1.5" opacity="0.25"/>
+  <line x1="578" y1="208" x2="668" y2="218" stroke="#8b5cf6" stroke-width="1.5" opacity="0.25"/>
+
+  <!-- Main card -->
+  <rect x="60" y="80" width="320" height="240" rx="20" fill="white" opacity="0.9"/>
+  <rect x="60" y="80" width="320" height="240" rx="20" stroke="url(#accent1)" stroke-width="2" fill="none"/>
+
+  <!-- Icon based on category -->
+  
+  <!-- AI brain for GEO -->
+  <circle cx="200" cy="175" r="50" stroke="#6366f1" stroke-width="3" fill="none"/>
+  <path d="M175 175 Q200 150 225 175 Q200 200 175 175" stroke="#8b5cf6" stroke-width="2" fill="none"/>
+  <circle cx="185" cy="165" r="5" fill="#a855f7" opacity="0.7"/>
+  <circle cx="215" cy="165" r="5" fill="#a855f7" opacity="0.7"/>
+  <circle cx="200" cy="190" r="4" fill="#8b5cf6" opacity="0.6"/>
+  
+
+  <!-- Decorative elements -->
+  <circle cx="158" cy="268" r="6" fill="#6366f1" opacity="0.4"/>
+  <circle cx="278" cy="258" r="6" fill="#8b5cf6" opacity="0.4"/>
+  <circle cx="200" cy="278" r="4" fill="#a855f7" opacity="0.3"/>
+
+  <!-- Data flow arrows -->
+  <path d="M420 180 L480 180" stroke="#6366f1" stroke-width="2" opacity="0.4"/>
+  <polygon points="480,175 490,180 480,185" fill="#6366f1" opacity="0.4"/>
+  <path d="M420 220 L480 220" stroke="#8b5cf6" stroke-width="2" opacity="0.3"/>
+  <polygon points="480,215 490,220 480,225" fill="#8b5cf6" opacity="0.3"/>
+
+  <!-- Floating metrics -->
+  <rect x="420" y="280" width="80" height="30" rx="8" fill="#6366f1" opacity="0.15"/>
+  <rect x="520" y="280" width="80" height="30" rx="8" fill="#8b5cf6" opacity="0.12"/>
+  <rect x="620" y="280" width="80" height="30" rx="8" fill="#a855f7" opacity="0.1"/>
+</svg>
