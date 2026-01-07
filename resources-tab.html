@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <title>Resources | Slee Automation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fafafa;
+            --bg-card: #ffffff;
+            --text: #1a1a1a;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --accent: #6366f1;
+            --accent-light: #eef2ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .category {
+            margin-bottom: 48px;
+        }
+
+        .category-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            padding-left: 4px;
+        }
+
+        .subcategory {
+            margin-bottom: 32px;
+        }
+
+        .subcategory-title {
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            margin-bottom: 12px;
+            padding-left: 4px;
+        }
+
+        .resources-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.15s ease;
+        }
+
+        .resource-item:hover {
+            border-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .resource-icon {
+            font-size: 1.25rem;
+            width: 28px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .resource-title {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .resource-arrow {
+            color: var(--text-muted);
+            opacity: 0;
+            transition: opacity 0.15s ease;
+        }
+
+        .resource-item:hover .resource-arrow {
+            opacity: 1;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-bottom: 40px;
+            transition: color 0.15s ease;
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .resource-item {
+                padding: 14px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/resources" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back
+        </a>
+
+        <header>
+            <h1>Resource Library</h1>
+            <p>Guides, templates, and tutorials</p>
+        </header>
+
+        <!-- AI Tools -->
+        <div class="category">
+            <div class="category-title">AI Tools</div>
+            <div class="resources-list">
+                <a href="https://www.notion.so/VEO3-1-000-Prompt-Library-2ad30a77e12280c3af84e786ee2b41fc" target="_blank" class="resource-item">
+                    <span class="resource-icon">🎬</span>
+                    <span class="resource-title">VEO3 - 1,000+ Prompt Library</span>
+                    <span class="resource-arrow">→</span>
+                </a>
+                <a href="https://www.notion.so/Create-an-Animation-in-30-Seconds-2ae30a77e12280f4af88e3ebd5185c44" target="_blank" class="resource-item">
+                    <span class="resource-icon">🎬</span>
+                    <span class="resource-title">Create an Animation in 30 Seconds</span>
+                    <span class="resource-arrow">→</span>
+                </a>
+                <a href="https://www.notion.so/Elon-Musk-s-High-Quality-Free-AI-Grok-AI-Complete-Guide-2ae30a77e12280b8b52ced3f247c0840" target="_blank" class="resource-item">
+                    <span class="resource-icon">🎬</span>
+                    <span class="resource-title">Grok AI Complete Guide</span>
+                    <span class="resource-arrow">→</span>
+                </a>
+                <a href="https://www.notion.so/How-to-Use-CapCut-Pro-Features-for-Free-by-SandyLeeAI-2ad30a77e122802aa421cdc6d377bd67" target="_blank" class="resource-item">
+                    <span class="resource-icon">🎬</span>
+                    <span class="resource-title">How to Use CapCut Pro Features for Free</span>
+                    <span class="resource-arrow">→</span>
+                </a>
+                <a href="https://www.notion.so/How-to-Use-Nano-Banana-Pro-for-Creative-Visuals-2b830a77e12280358664fd6d79cf53e2" target="_blank" class="resource-item">
+                    <span class="resource-icon">🍌</span>
+                    <span class="resource-title">How to Use Nano Banana Pro for Creative Visuals</span>
+                    <span class="resource-arrow">→</span>
+                </a>
+                <a href="https://www.notion.so/The-Easiest-Way-to-Create-High-Quality-AI-Images-2be30a77e12280d888bef54d3b164853" target="_blank" class="resource-item">
+                    <span class="resource-icon">📷</span>
+                    <span class="resource-title">The Easiest Way to Create High-Quality AI Images</span>
+                    <span class="resource-arrow">→</span>
+                </a>
+                <a href="https://www.notion.so/What-s-New-in-GPT-5-1-Simple-Explained-2ae30a77e122803aaadfc8f161f90644" target="_blank" class="resource-item">
+                    <span class="resource-icon">🤖</span>
+                    <span class="resource-title">What's New in GPT-5.1 (Simple Explained)</span>
+                    <span class="resource-arrow">→</span>
+                </a>
+                <a href="https://www.notion.so/How-to-Prevent-ChatGPT-From-Hallucinating-2ae30a77e12280b0aa95fcb6fea195ba" target="_blank" class="resource-item">
+                    <span class="resource-icon">🤖</span>
+                    <span class="resource-title">How to Prevent ChatGPT From Hallucinating</span>
+                    <span class="resource-arrow">→</span>
+                </a>
+                <a href="https://www.notion.so/AI-Accuracy-Up-340-The-6-KERNEL-Prompt-Laws-Proven-by-1-000-Hours-of-Experiments-2ae30a77e1228012b162ec25a8d2f883" target="_blank" class="resource-item">
+                    <span class="resource-icon">🚀</span>
+                    <span class="resource-title">AI Accuracy Up 340%: The 6 KERNEL Prompt Laws</span>
+                    <span class="resource-arrow">→</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- AI Agency -->
+        <div class="category">
+            <div class="category-title">AI Agency</div>
+
+            <!-- Tech -->
+            <div class="subcategory">
+                <div class="subcategory-title">Tech</div>
+                <div class="resources-list">
+                    <a href="https://www.notion.so/How-to-Set-Up-Claude-Code-Antigravity-2dc30a77e122801787f5d8fd0e526a82" target="_blank" class="resource-item">
+                        <span class="resource-icon">👩🏻‍💻</span>
+                        <span class="resource-title">How to Set Up Claude Code + Antigravity</span>
+                        <span class="resource-arrow">→</span>
+                    </a>
+                    <a href="https://www.notion.so/AGENTS-md-2d730a77e122803cb776fe4edf282647" target="_blank" class="resource-item">
+                        <span class="resource-icon">🖥️</span>
+                        <span class="resource-title">AGENTS.md</span>
+                        <span class="resource-arrow">→</span>
+                    </a>
+                    <a href="https://www.notion.so/Apply-to-Upwork-Jobs-Faster-Using-N8N-Without-Wasting-Connects-2d730a77e122805d85dbddeb3f325b23" target="_blank" class="resource-item">
+                        <span class="resource-icon">🚀</span>
+                        <span class="resource-title">Apply to Upwork Jobs Faster Using N8N</span>
+                        <span class="resource-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sales -->
+            <div class="subcategory">
+                <div class="subcategory-title">Sales</div>
+                <div class="resources-list">
+                    <a href="https://www.notion.so/Build-an-AI-Agency-2d430a77e12280b0a783faf7d0dc4872" target="_blank" class="resource-item">
+                        <span class="resource-icon">🏢</span>
+                        <span class="resource-title">Build an AI Agency</span>
+                        <span class="resource-arrow">→</span>
+                    </a>
+                    <a href="https://www.notion.so/Apply-to-Upwork-Jobs-Faster-Using-AI-Infographics-Without-Wasting-Connects-2d630a77e12280f1b733d33c3f4b54de" target="_blank" class="resource-item">
+                        <span class="resource-icon">🚀</span>
+                        <span class="resource-title">Apply to Upwork Jobs Faster Using AI Infographics</span>
+                        <span class="resource-arrow">→</span>
+                    </a>
+                    <a href="https://royal-case-856.notion.site/ICA-Template-Your-Ideal-Follower-Blueprint-23c30a77e122805aba74cc1bf7660582" target="_blank" class="resource-item">
+                        <span class="resource-icon">👤</span>
+                        <span class="resource-title">ICA Template: Your Ideal Follower Blueprint</span>
+                        <span class="resource-arrow">→</span>
+                    </a>
+                    <a href="https://www.notion.so/SEO-Basics-for-Beginners-Mini-Course-b3fd6363450c4238923dd54b5dcc5953" target="_blank" class="resource-item">
+                        <span class="resource-icon">🧭</span>
+                        <span class="resource-title">SEO Basics for Beginners (Mini-Course)</span>
+                        <span class="resource-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

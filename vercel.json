@@ -1,0 +1,21 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/geo-audit",
+      "destination": "https://geo-audit-app.vercel.app/"
+    },
+    {
+      "source": "/geo-audit/:path*",
+      "destination": "https://geo-audit-app.vercel.app/:path*"
+    },
+    {
+      "source": "/geo-audit-internaluse",
+      "destination": "https://geo-audit-internal.vercel.app/"
+    },
+    {
+      "source": "/geo-audit-internaluse/:path*",
+      "destination": "https://geo-audit-internal.vercel.app/:path*"
+    }
+  ]
+}
