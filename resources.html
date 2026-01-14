@@ -571,11 +571,12 @@
 
                 <div class="success-message" id="successMessage">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="2" y="4" width="20" height="16" rx="2"/>
-                        <path d="M22 7l-10 7L2 7"/>
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
                     </svg>
-                    <h3>Check your email!</h3>
-                    <p>I just sent you an email with the link to access all the resources. Check your inbox and <strong>spam/promotions folder</strong> - it sometimes lands there!</p>
+                    <h3>You're In!</h3>
+                    <p>Click the button below to access all the free resources - templates, tools, guides, and more.</p>
+                    <a href="https://sleeautomation.com/resources-tab" class="btn btn-primary" style="margin-top: 20px; display: inline-block; color: white;">Access Resources</a>
                 </div>
             </div>
         </div>
@@ -654,8 +655,9 @@
         const successMessage = document.getElementById('successMessage');
         const submitBtn = document.getElementById('submitBtn');
 
-        // Google Apps Script Web App URL - Replace with your deployed script URL
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzYPYe832njUoWYKd0XzTgMqERv7g6R33OnXU2ZF-BxLjYuZjdkHueAwFCuOsNYD05_lQ/exec';
+        // Supabase config
+        const SUPABASE_URL = 'https://vrydkueviwvvprkazhxj.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_anihm9b2S_G5VQJ5Xbga0Q_eY2raXqc';
 
         accessForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -665,43 +667,36 @@
 
             if (!name || !email) return;
 
-            // Add loading state
-            submitBtn.classList.add('loading');
-            submitBtn.querySelector('span').textContent = 'Submitting...';
+            // Show success immediately
+            formContent.classList.add('hide');
+            successMessage.classList.add('show');
 
+            // Save to Supabase
             try {
-                // Send to Google Sheets via Apps Script
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
                     method: 'POST',
-                    mode: 'no-cors', // Required for Google Apps Script
                     headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`,
                         'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
                     },
                     body: JSON.stringify({
                         name: name,
                         email: email,
-                        source: 'resources-page',
-                        timestamp: new Date().toISOString()
+                        source: 'resources-page'
                     })
                 });
-
-                // Show success (no-cors doesn't return response, so we assume success)
-                formContent.classList.add('hide');
-                successMessage.classList.add('show');
-
-                // Store in localStorage to remember the user
-                localStorage.setItem('resourcesAccess', JSON.stringify({
-                    name: name,
-                    email: email,
-                    timestamp: new Date().toISOString()
-                }));
-
-            } catch (error) {
-                console.error('Error:', error);
-                // Still show success for user experience (data might have been saved)
-                formContent.classList.add('hide');
-                successMessage.classList.add('show');
+            } catch (err) {
+                console.log('Save error:', err);
             }
+
+            // Store in localStorage
+            localStorage.setItem('resourcesAccess', JSON.stringify({
+                name: name,
+                email: email,
+                timestamp: new Date().toISOString()
+            }));
         });
 
     </script>
