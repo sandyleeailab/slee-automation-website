@@ -2238,14 +2238,14 @@ h3 {
 }
 
 .blog-header h1 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    margin-bottom: 16px;
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    margin-bottom: 12px;
 }
 
 .blog-intro {
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: var(--text-light);
-    line-height: 1.7;
+    line-height: 1.6;
 }
 
 .blog-page .blog-grid {
@@ -2269,26 +2269,26 @@ h3 {
 }
 
 .blog-page .blog-content {
-    padding: 32px;
+    padding: 20px 24px;
 }
 
 .blog-page .blog-content h3 {
-    font-size: 1.25rem;
-    margin-bottom: 12px;
+    font-size: 1rem;
+    margin-bottom: 8px;
     line-height: 1.4;
 }
 
 .blog-page .blog-content p {
     color: var(--text-light);
-    font-size: 0.9375rem;
-    line-height: 1.7;
-    margin-bottom: 20px;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    margin-bottom: 12px;
 }
 
 .blog-page .blog-meta {
     display: flex;
-    gap: 16px;
-    font-size: 0.8125rem;
+    gap: 12px;
+    font-size: 0.75rem;
     color: var(--text-light);
 }
 
@@ -2299,9 +2299,9 @@ h3 {
 }
 
 .blog-page .blog-cta p {
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: var(--text-light);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 @media (max-width: 1024px) {
@@ -2355,7 +2355,7 @@ h3 {
     }
 
     .blog-card.featured-post h3 {
-        font-size: 1.5rem;
+        font-size: 1.125rem;
     }
 }
 
