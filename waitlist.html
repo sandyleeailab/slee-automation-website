@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slee Automation — Waitlist</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #08080a;
+    --surface: #0f0f12;
+    --border: #1a1a20;
+    --text: #e6e4e0;
+    --muted: #7a7770;
+    --dim: #3d3b38;
+    --gold: #c8a44e;
+    --gold-soft: rgba(200,164,78,0.08);
+  }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'Geist', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh;
+    padding: 2rem;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(200,164,78,0.04) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .page {
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    animation: enter 1s ease forwards 0.2s;
+  }
+
+  @keyframes enter {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .photo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 15%;
+    border: 2.5px solid var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(200,164,78,0.2);
+    padding: 0.45rem 1.1rem;
+    margin-bottom: 2.8rem;
+  }
+
+  .badge .dot {
+    width: 5px;
+    height: 5px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+    font-weight: 400;
+    line-height: 1.12;
+    margin-bottom: 1.6rem;
+    letter-spacing: -0.01em;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .sub {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 420px;
+    margin: 0 auto 2.8rem;
+  }
+
+  .form-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 420px;
+    margin: 0 auto 1rem;
+  }
+
+  .form-stack input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Geist', sans-serif;
+    font-size: 0.9rem;
+    padding: 0.95rem 1.1rem;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .form-stack input::placeholder { color: var(--dim); }
+  .form-stack input:focus { border-color: rgba(200,164,78,0.3); }
+
+  .form-stack button {
+    width: 100%;
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    color: var(--bg);
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.15rem;
+  }
+
+  .form-stack button:hover {
+    background: #d4b25c;
+    box-shadow: 0 0 30px rgba(200,164,78,0.15);
+  }
+
+  .form-stack button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .note {
+    font-size: 0.72rem;
+    color: var(--dim);
+    letter-spacing: 0.02em;
+    margin-top: 1.2rem;
+  }
+
+  .success-msg {
+    display: none;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 1.2rem;
+    border: 1px solid rgba(200,164,78,0.2);
+    background: var(--gold-soft);
+    text-align: center;
+  }
+
+  .success-msg .check { font-size: 1.2rem; margin-bottom: 0.4rem; color: var(--gold); }
+  .success-msg .msg { font-size: 0.88rem; color: var(--text); line-height: 1.5; }
+  .success-msg .msg strong { color: var(--gold); font-weight: 500; }
+
+  .error-msg {
+    display: none;
+    color: #c85a5a;
+    font-size: 0.8rem;
+    margin-top: 0.75rem;
+    text-align: center;
+  }
+
+  .credit {
+    font-size: 0.68rem;
+    color: var(--dim);
+    margin-top: 3rem;
+  }
+
+  .credit a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .credit a:hover { color: var(--gold); }
+
+  @media (max-width: 500px) {
+    body { padding: 1.5rem; }
+    .form-stack { max-width: 100%; }
+    .photo { width: 76px; height: 76px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <img class="photo" src="/sandy.jpg" alt="Sandy Lee">
+
+  <div class="badge">
+    <span class="dot"></span>
+    Coming Soon
+  </div>
+
+  <h1>Automate your <em>entire business</em></h1>
+
+  <p class="sub">
+    AI-powered content creation, lead generation, and business automation.
+    Built for creators and entrepreneurs who move fast.
+  </p>
+
+  <form class="form-stack" id="waitlistForm">
+    <input type="text" name="name" placeholder="Your name" required>
+    <input type="email" name="email" placeholder="Your email" required>
+    <button type="submit">Join the Waitlist</button>
+  </form>
+
+  <div class="success-msg" id="successMsg">
+    <div class="check">✓</div>
+    <div class="msg"><strong>You're on the list.</strong> We'll be in touch soon.</div>
+  </div>
+
+  <div class="error-msg" id="errorMsg"></div>
+
+  <p class="note">No spam, ever. Unsubscribe anytime.</p>
+
+  <p class="credit"><a href="/">sleeautomation.com</a></p>
+</div>
+
+<script>
+  const form = document.getElementById('waitlistForm');
+  const successMsg = document.getElementById('successMsg');
+  const errorMsg = document.getElementById('errorMsg');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button');
+    const name = form.querySelector('input[name="name"]').value;
+    const email = form.querySelector('input[name="email"]').value;
+
+    btn.disabled = true;
+    btn.textContent = '...';
+    errorMsg.style.display = 'none';
+
+    try {
+      const SUPABASE_URL = 'https://vrydkueviwvvprkazhxj.supabase.co';
+      const SUPABASE_ANON_KEY = 'sb_publishable_anihm9b2S_G5VQJ5Xbga0Q_eY2raXqc';
+
+      const res = await fetch(SUPABASE_URL + '/rest/v1/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ name: name, email: email })
+      });
+
+      if (res.ok || res.status === 201) {
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+      } else if (res.status === 409) {
+        errorMsg.textContent = "You're already on the waitlist!";
+        errorMsg.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Join the Waitlist';
+      } else {
+        const data = await res.json().catch(() => ({}));
+        if (data.message && data.message.includes('duplicate')) {
+          errorMsg.textContent = "You're already on the waitlist!";
+        } else {
+          errorMsg.textContent = 'Something went wrong. Please try again.';
+        }
+        errorMsg.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Join the Waitlist';
+      }
+    } catch (err) {
+      errorMsg.textContent = 'Connection error. Please try again.';
+      errorMsg.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Join the Waitlist';
+    }
+  });
+</script>
+
+</body>
+</html>
