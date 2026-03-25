@@ -293,6 +293,15 @@
         body: JSON.stringify({ name: name, email: email })
       });
 
+      // Save to Google Sheets
+      const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwauuPEZJrbeO2NM3_dXxu9rjFtqZwAgqWIdGvYHATTuB3euLfTxA7xP2aW-ToNYDK4Ug/exec';
+      fetch(SHEETS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, source: 'waitlist' })
+      }).catch(() => {});
+
       if (res.ok || res.status === 201) {
         form.style.display = 'none';
         successMsg.style.display = 'block';
